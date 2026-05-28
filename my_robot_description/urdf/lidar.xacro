@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="lidar_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.06" length="0.04" />
+            </geometry>
+            <origin xyz="0 0 0.02" rpy="0 0 0" />
+        </visual>
+        <xacro:cylinder_inertia m="0.5" r="0.06" h="0.04" 
+                                o_xyz="0 0 0" o_rpy="0 0 0" />
+        <collision>
+            <geometry>
+                <cylinder radius="0.06" length="0.04" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="lidar_base_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.02" length="0.15" />
+            </geometry>
+            <origin xyz="0 0 0.075" rpy="0 0 0"/>
+            <material name="grey" />
+        </visual>
+        <xacro:cylinder_inertia m="0.2" r="0.02" h="0.15" 
+                                o_xyz="0 0 0" o_rpy="0 0 0" />
+        
+    </link>
+
+    <joint name="base_lidar_base_joint" type="fixed" >
+        <parent link="base_link" />
+        <child link="lidar_base_link" />
+        <origin xyz="-0.18 0 0.2" rpy="0 0 0" />
+    </joint>
+
+    <joint name="lidar_base_lidar_joint" type="fixed">
+        <parent link="lidar_base_link" />
+        <child link="lidar_link" />
+        <origin xyz="0 0 0.15" rpy="0 0 0" />
+    </joint>
+
+
+    <gazebo reference="lidar_link">
+        <sensor name="lidar_sensor" type="gpu_lidar">
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <topic>/scan</topic>
+            <gz_frame_id>lidar_link</gz_frame_id>
+
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>720</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-3.14159</min_angle>
+                        <max_angle>3.14159</max_angle>
+                    </horizontal>
+                </scan>
+
+                <range>
+                    <min>0.12</min>
+                    <max>8.0</max>
+                    <resolution>0.01</resolution>
+                </range>
+
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+        </sensor>
+    </gazebo>
+
+</robot>
