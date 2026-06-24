@@ -8,7 +8,7 @@
 
 - 基于 2D LiDAR 的 SLAM 建图
 - 地图保存与加载
-- 基于 AMCL 的定位
+- 基于 cartographer 的定位
 - 基于 Nav2 的目标点自主导航
 - RGB-D 相机目标检测
 - 红色目标物体三维定位
