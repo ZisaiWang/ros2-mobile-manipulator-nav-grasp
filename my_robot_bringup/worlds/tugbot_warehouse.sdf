@@ -1,0 +1,1483 @@
+<sdf version="1.10">
+  <world name="world_demo">
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <physics type="ode">
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <max_contacts>10</max_contacts>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <scene>
+      <ambient>1 1 1 1</ambient>
+      <background>0.300000012 0.699999988 0.899999976 1</background>
+      <shadows>false</shadows>
+      <grid>false</grid>
+    </scene>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type="adiabatic" />
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1 1</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name="warehouse">
+      <pose>0 0 -0.089999999999999997 0 0 0</pose>
+      <self_collide>false</self_collide>
+      <link name="warehouse_base">
+        <pose>0 0 0 0 0 0</pose>
+        <collision name="warehouse_collision">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/warehouse/1/meshes/warehouse_colision.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="warehouse_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/warehouse/1/meshes/warehouse.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="drop_area_visual">
+          <pose>0 0 0.10100000000000001 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/warehouse/1/meshes/warehouse.dae</uri>
+              <submesh>
+                <name>drop1</name>
+                <center>true</center>
+              </submesh>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_big_0">
+      <pose>-9.3417700000000004 -13.559799999999999 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_big_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_big_chassi_collision">
+          <pose>0 0 3 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.1000000000000001 18 6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_big_chassi_visual">
+          <pose>0 0 0 0 0 1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf">
+      <pose>-4.4152800000000001 -0.69098700000000002 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_0">
+      <pose>-4.4152800000000001 2.3069700000000002 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_1">
+      <pose>-4.4152800000000001 5.30708 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_2">
+      <pose>-4.4152800000000001 8.3435199999999998 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_3">
+      <pose>5.6014400000000002 8.3435199999999998 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_4">
+      <pose>5.6014400000000002 5.30708 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_5">
+      <pose>5.6014400000000002 -0.69098700000000002 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_6">
+      <pose>5.6014400000000002 2.3069700000000002 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="pallet_box_mobile">
+      <pose>4.4161000000000001 14.6952 -0.0050731861208288724 1.1749234964324357e-15 -4.3902863328800283e-15 -1.1757045036595597e-16</pose>
+      <self_collide>false</self_collide>
+      <link name="pallet_base">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0.40000000000000002 0 0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>0.10000000000000001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.10000000000000001</iyy>
+            <iyz>0</iyz>
+            <izz>0.10000000000000001</izz>
+          </inertia>
+        </inertial>
+        <collision name="pallet_top_collision">
+          <pose>0 0 0.125 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 0.040000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.40000000000000002</mu>
+                <mu2>0.40000000000000002</mu2>
+              </ode>
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_center_collision">
+          <pose>0 0 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_left_collision">
+          <pose>0 -0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_right_collision">
+          <pose>0 0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="boxes_collision">
+          <pose>0 0 0.64400000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="pallet_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet/2/meshes/pallet.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="boxes_visual">
+          <pose>-0.053874999999999999 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet_box_mobile/3/meshes/boxes.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="pallet_box_mobile_0">
+      <pose>4.4541500000000003 13.6212 -0.0050731861208293981 -2.0685322476621871e-15 -3.1722181410501013e-15 -5.5939419976979108e-18</pose>
+      <self_collide>false</self_collide>
+      <link name="pallet_base">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0.40000000000000002 0 0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>0.10000000000000001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.10000000000000001</iyy>
+            <iyz>0</iyz>
+            <izz>0.10000000000000001</izz>
+          </inertia>
+        </inertial>
+        <collision name="pallet_top_collision">
+          <pose>0 0 0.125 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 0.040000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.40000000000000002</mu>
+                <mu2>0.40000000000000002</mu2>
+              </ode>
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_center_collision">
+          <pose>0 0 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_left_collision">
+          <pose>0 -0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_right_collision">
+          <pose>0 0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="boxes_collision">
+          <pose>0 0 0.64400000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="pallet_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet/2/meshes/pallet.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="boxes_visual">
+          <pose>-0.053874999999999999 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet_box_mobile/3/meshes/boxes.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="pallet_box_mobile_1">
+      <pose>4.4467999999999996 12.228999999999999 -0.0050731861208294362 3.2173503571184154e-16 -4.4980646155232541e-15 -5.6566829664785449e-16</pose>
+      <self_collide>false</self_collide>
+      <link name="pallet_base">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0.40000000000000002 0 0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>0.10000000000000001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.10000000000000001</iyy>
+            <iyz>0</iyz>
+            <izz>0.10000000000000001</izz>
+          </inertia>
+        </inertial>
+        <collision name="pallet_top_collision">
+          <pose>0 0 0.125 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 0.040000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.40000000000000002</mu>
+                <mu2>0.40000000000000002</mu2>
+              </ode>
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_center_collision">
+          <pose>0 0 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_left_collision">
+          <pose>0 -0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_right_collision">
+          <pose>0 0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="boxes_collision">
+          <pose>0 0 0.64400000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="pallet_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet/2/meshes/pallet.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="boxes_visual">
+          <pose>-0.053874999999999999 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet_box_mobile/3/meshes/boxes.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="pallet_box">
+      <pose>-6.1191300000000002 13.7079 0.01 0 0 0</pose>
+      <self_collide>false</self_collide>
+      <link name="pallet_base">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0.40000000000000002 0 0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>0.10000000000000001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.10000000000000001</iyy>
+            <iyz>0</iyz>
+            <izz>0.10000000000000001</izz>
+          </inertia>
+        </inertial>
+        <collision name="pallet_top_collision">
+          <pose>0 0 0.125 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 0.040000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.40000000000000002</mu>
+                <mu2>0.40000000000000002</mu2>
+              </ode>
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_center_collision">
+          <pose>0 0 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_left_collision">
+          <pose>0 -0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_right_collision">
+          <pose>0 0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="boxes_collision">
+          <pose>0 0 0.64400000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="pallet_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet/2/meshes/pallet.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="boxes_visual">
+          <pose>-0.053874999999999999 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet_box_mobile/3/meshes/boxes.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_big_1">
+      <pose>13.982100000000001 15.319000000000001 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_big_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_big_chassi_collision">
+          <pose>0 0 3 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.1000000000000001 18 6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_big_chassi_visual">
+          <pose>0 0 0 0 0 1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_big_2">
+      <pose>6.1977700000000002 -12.964700000000001 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_big_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_big_chassi_collision">
+          <pose>0 0 3 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.1000000000000001 18 6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_big_chassi_visual">
+          <pose>0 0 0 0 0 1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_big_3">
+      <pose>0.59437600000000002 -12.964700000000001 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_big_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_big_chassi_collision">
+          <pose>0 0 3 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.1000000000000001 18 6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_big_chassi_visual">
+          <pose>0 0 0 0 0 1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_big_4">
+      <pose>-5.3628400000000003 -12.964700000000001 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_big_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_big_chassi_collision">
+          <pose>0 0 3 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>2.1000000000000001 18 6</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_big_chassi_visual">
+          <pose>0 0 0 0 0 1.57079632679</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_7">
+      <pose>13.3818 -21.241599999999998 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_8">
+      <pose>13.3818 -19.002800000000001 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_9">
+      <pose>13.3818 -16.447800000000001 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="shelf_10">
+      <pose>13.3818 -14.1028 0 0 0 0</pose>
+      <self_collide>true</self_collide>
+      <link name="shelf_base">
+        <pose>-0.5 0 0 0 0 0</pose>
+        <collision name="shelf_chassi_collision">
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3.6000000000000001 0.59999999999999998 1.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="shelf_chassi_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.20000000000000001 0.29999999999999999 0.29999999999999999</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/shelf_big/2/meshes/shelf_big_movai.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <model name="pallet_box_0">
+      <pose>14.0222 -24.335000000000001 0.01 0 0 0</pose>
+      <self_collide>false</self_collide>
+      <link name="pallet_base">
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0.40000000000000002 0 0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>0.10000000000000001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.10000000000000001</iyy>
+            <iyz>0</iyz>
+            <izz>0.10000000000000001</izz>
+          </inertia>
+        </inertial>
+        <collision name="pallet_top_collision">
+          <pose>0 0 0.125 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 0.040000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.40000000000000002</mu>
+                <mu2>0.40000000000000002</mu2>
+              </ode>
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_center_collision">
+          <pose>0 0 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_left_collision">
+          <pose>0 -0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="pallet_right_collision">
+          <pose>0 0.34999999999999998 0.055 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.10000000000000001 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <collision name="boxes_collision">
+          <pose>0 0 0.64400000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.22 0.80000000000000004 1</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode />
+            </friction>
+            <bounce />
+            <contact />
+          </surface>
+        </collision>
+        <visual name="pallet_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet/2/meshes/pallet.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="boxes_visual">
+          <pose>-0.053874999999999999 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/wzs/.gz/fuel/fuel.ignitionrobotics.org/movai/models/pallet_box_mobile/3/meshes/boxes.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>true</static>
+    </model>
+    <light name="sun" type="directional">
+      <pose>-5 -3 10 0 0 0</pose>
+      <cast_shadows>false</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>1 1 1 1</specular>
+      <attenuation>
+        <range>10</range>
+        <linear>1</linear>
+        <constant>1</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>

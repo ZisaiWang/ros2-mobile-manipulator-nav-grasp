@@ -462,14 +462,128 @@ If the robot only rotates or backs up, possible reasons include:
 
 ## 8. Technical Details
 
-### SLAM
+## SLAM Mapping
 
-The project uses `slam_toolbox` for 2D LiDAR-based mapping.  
-The generated map is saved by `nav2_map_server`.
+This project supports two SLAM mapping methods:
 
-### Localization
+* `slam_toolbox`
+* Google Cartographer
 
-The saved map is loaded by `map_server`, and AMCL is used for localization.
+### Mapping with slam_toolbox
+
+Launch the robot simulation and `slam_toolbox`:
+
+```bash
+ros2 launch my_robot_bringup robot_with_slam.launch.xml
+```
+
+The robotic arm will automatically move to a folded pose approximately 10 seconds after startup.
+
+Open another terminal and control the robot using keyboard teleoperation:
+
+```bash
+source ~/ros2_ws/install/setup.bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+
+---
+
+### Mapping with Cartographer
+
+Launch the robot simulation and Cartographer:
+
+```bash
+ros2 launch my_robot_bringup robot_with_cartographer.launch.xml
+```
+
+Cartographer uses the following inputs:
+
+```text
+/scan
+/odom
+/tf
+/tf_static
+/clock
+```
+
+The required TF tree is:
+
+```text
+map
+└── odom
+    └── base_footprint
+        └── base_link
+            └── lidar_base_link
+                └── lidar_link
+```
+
+Open another terminal and control the robot:
+
+```bash
+source ~/ros2_ws/install/setup.bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+
+Move the robot slowly through the environment and avoid rotating too quickly to improve mapping quality.
+
+---
+
+## Save the Cartographer Map
+
+Keep Cartographer running and open a new terminal:
+
+```bash
+source ~/ros2_ws/install/setup.bash
+```
+
+Save the occupancy grid map for Nav2:
+
+```bash
+ros2 run nav2_map_server map_saver_cli \
+  -f ~/ros2_ws/src/my_robot_bringup/map/warehouse_map_cartographer \
+  --ros-args -p save_map_timeout:=30.0
+```
+
+The command generates:
+
+```text
+warehouse_map_cartographer.yaml
+warehouse_map_cartographer.pgm
+```
+
+You can also save the complete Cartographer SLAM state:
+
+```bash
+ros2 service call /write_state \
+  cartographer_ros_msgs/srv/WriteState \
+  "{filename: '/home/wzs/ros2_ws/src/my_robot_bringup/map/warehouse_map_cartographer.pbstream', include_unfinished_submaps: true}"
+```
+
+The `.yaml` and `.pgm` files are used by Nav2, while the `.pbstream` file stores Cartographer submaps, trajectories, and constraints.
+
+---
+
+## Navigation with the Saved Map
+
+After saving the map, stop the Cartographer mapping launch.
+
+Launch the robot with the saved map:
+
+```bash
+ros2 launch my_robot_bringup robot_with_map.launch.xml
+```
+
+Open another terminal and launch Nav2:
+
+```bash
+source ~/ros2_ws/install/setup.bash
+ros2 launch my_robot_bringup nav2.launch.py
+```
+
+Use `2D Pose Estimate` in RViz to initialize the robot pose when necessary, and use `Nav2 Goal` to send a navigation target.
+
+Cartographer is responsible for SLAM and localization. Nav2 is responsible for global path planning, local planning, obstacle avoidance, and velocity command generation.
+
 
 ### Navigation
 
